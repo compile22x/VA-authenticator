@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:20
 EXPOSE 19408 19001
 WORKDIR /usr/src/app
 COPY package.json ./
