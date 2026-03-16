@@ -1,17 +1,23 @@
-app = "authenticator"
-primary_region = "iad"
+# fly.toml app configuration file generated for authenticator on 2026-03-15T00:07:10Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'authenticator'
+primary_region = 'iad'
 
 [build]
-  dockerfile = "Dockerfile"
 
 [http_service]
   internal_port = 19408
   force_https = false  # Auth server uses HTTP internally
   auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1  # Keep at least 1 machine running to prevent auto-suspend
+  processes = ['app']
 
-[vm]
-  memory = "256mb"
-  cpu_kind = "shared"
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 512
