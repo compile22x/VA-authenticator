@@ -8,18 +8,22 @@ primary_region = 'iad'
 
 [build]
 
+# HTTP Auth API (for FA-Vertair and drone agents)
 [http_service]
   internal_port = 19408
-  force_https = false  # Auth server uses HTTP internally
+  force_https = false
   auto_stop_machines = false
   auto_start_machines = true
   min_machines_running = 1
   processes = ['app']
 
-# WebSocket for server-to-server communication (de-server connects here)
+# WebSocket for server-to-server (de-server connects here on startup)
 [[services]]
   protocol = "tcp"
   internal_port = 19001
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
   
   [[services.ports]]
     port = 19001
