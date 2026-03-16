@@ -16,6 +16,14 @@ primary_region = 'iad'
   min_machines_running = 1
   processes = ['app']
 
+# WebSocket for server-to-server communication (de-server connects here)
+[[services]]
+  protocol = "tcp"
+  internal_port = 19001
+  
+  [[services.ports]]
+    port = 19001
+
 [[vm]]
   memory = '512mb'
   cpu_kind = 'shared'
