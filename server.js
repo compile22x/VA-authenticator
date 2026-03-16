@@ -82,7 +82,8 @@ function fn_startExpressServer ()
         };
         v_https.createServer(v_options, c_app).listen(c_app.get('port'));
     } else {
-        c_app.listen(c_app.get('port'));
+        let v_http = require('http');
+        v_http.createServer(c_app).listen(c_app.get('port'));
     }
 
 
