@@ -7,7 +7,7 @@ const C = global.c_CONSTANTS;
 v_router.m_Router.post(C.CONST_WEB_FUNCTION + C.CONST_WEB_LOGIN_COMMAND, function (v_req, v_response, v_next) {
 
     try {
-        console.log("debug ... " + C.CONST_WEB_LOGIN_COMMAND + " called");
+        console.log("[" + new Date().toLocaleString("en-US",{timeZone:"America/New_York",hour12:false}) + " EST" + "] [INFO ] [AUTH] Login request received");
 
         //https://github.com/expressjs/express/issues/3264
         Object.setPrototypeOf(v_req.body, {});
@@ -61,7 +61,10 @@ v_router.m_Router.post(C.CONST_WEB_FUNCTION + C.CONST_WEB_LOGIN_COMMAND, functio
                 p_data[C.CONST_COMMAND.toString()] = C.CONST_WEB_LOGIN_COMMAND;
                 v_response.json(p_data);
 
-                console.log("debug ... fn_newLoginCard: " + JSON.stringify(p_data));
+                const _e = (p_data && p_data.e !== undefined) ? p_data.e : "?";
+                const _key = (p_data && p_data.cs && p_data.cs.f) ? ("..." + p_data.cs.f.slice(-8)) : "";
+                const _em = (p_data && p_data.em) ? (" em=" + p_data.em) : "";
+                console.log("[" + new Date().toLocaleString("en-US",{timeZone:"America/New_York",hour12:false}) + " EST" + "] [INFO ] [AUTH] Login " + (_e===0 ? "OK key=" + _key : "FAIL e=" + _e + _em));
 
             },
             function () {
@@ -78,7 +81,7 @@ v_router.m_Router.post(C.CONST_WEB_FUNCTION + C.CONST_WEB_LOGIN_COMMAND, functio
 v_router.m_Router.post(C.CONST_WEB_FUNCTION + C.CONST_ACCOUNT_MANAGMENT, function (v_req, v_response, v_next) {
 
     try {
-        console.log("debug ... " + C.CONST_ACCOUNT_MANAGMENT + " called");
+        console.log("[" + new Date().toLocaleString("en-US",{timeZone:"America/New_York",hour12:false}) + " EST" + "] [INFO ] [AUTH] Account management request");
 
         //https://github.com/expressjs/express/issues/3264
         Object.setPrototypeOf(v_req.body, {});
@@ -124,7 +127,7 @@ v_router.m_Router.post(C.CONST_WEB_FUNCTION + C.CONST_WEB_LOGOUT_COMMAND, functi
     
     try {
         
-        console.log("debug ... " + C.CONST_WEB_LOGOUT_COMMAND + " called");
+        console.log("[" + new Date().toLocaleString("en-US",{timeZone:"America/New_York",hour12:false}) + " EST" + "] [INFO ] [AUTH] Logout request");
 
         // Sanitize request body
         Object.setPrototypeOf(v_req.body, {});
