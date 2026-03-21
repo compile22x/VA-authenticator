@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for authenticator on 2026-03-15T00:07:10Z
+# fly.toml app configuration file generated for authenticator on 2026-03-17T22:12:41Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -8,27 +8,16 @@ primary_region = 'iad'
 
 [build]
 
-# HTTP Auth API (for FA-Vertair and drone agents)
 [http_service]
   internal_port = 19408
-  force_https = false
-  auto_stop_machines = false
+  force_https = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 1
+  min_machines_running = 0
   processes = ['app']
 
-# S2S WebSocket for comm<->auth internal communication (6PN)
-[[services]]
-  internal_port = 19001
-  protocol = 'tcp'
-  auto_stop_machines = false
-  auto_start_machines = true
-  min_machines_running = 1
-
-  [[services.ports]]
-    port = 19001
-
 [[vm]]
-  memory = '512mb'
+  memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 1024
